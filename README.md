@@ -7,7 +7,7 @@ The MultiSet Quest SDK can be integrated into your Unity project using two diffe
 Before starting, ensure you have:
 - **Unity 2022.3.50+** (recommended: 2022.3.58f1 or later)
 - **Android Build Support** module installed
-- **Meta Quest 2, 3, 3S, or Pro** device
+- **Meta Quest 3, 3S** device
 - **Stable internet connection** for VPS functionality
 - **MultiSet API credentials** (Client ID and Client Secret from [multiset.ai](https://multiset.ai))
 
