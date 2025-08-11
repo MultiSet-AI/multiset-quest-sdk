@@ -1,199 +1,247 @@
-# Installation Guide
+# MultiSet Quest SDK - Installation Guide
 
-The MultiSet Quest SDK can be integrated into your Unity project using two different approaches. Choose the method that best fits your development workflow.
+![MultiSet SDK](https://img.shields.io/badge/Unity-6000.0.55f1+-blue) ![Platform](https://img.shields.io/badge/Platform-Meta%20Quest-green) ![Version](https://img.shields.io/badge/Version-1.8.0-orange)
 
-## Prerequisites
+The MultiSet Quest SDK enables seamless integration of Visual Positioning System (VPS) capabilities into your Unity Meta Quest applications, providing accurate spatial localization and mesh visualization features.
 
-Before starting, ensure you have:
-- **Unity 2022.3.50+** (recommended: 2022.3.58f1 or later)
-- **Android Build Support** module installed
-- **Meta Quest 3, 3S** device
-- **Stable internet connection** for VPS functionality
-- **MultiSet API credentials** (Client ID and Client Secret from [multiset.ai](https://multiset.ai))
+## 📋 Prerequisites
 
-## Option 1: Clone SDK Repository (Recommended)
+Before you begin, make sure you have the following:
 
-This is the fastest way to get started with a complete, ready-to-use project.
+| Requirement | Details |
+|-------------|---------|
+| **Unity Version** | Unity 6.0+ (Recommended: 6000.0.55f1) |
+| **Platform Support** | Android Build Support module |
+| **Target Device** | Meta Quest 3 or Quest 3S |
+| **Network** | Stable internet connection for VPS functionality |
+| **API Access** | MultiSet API credentials from [multiset.ai](https://multiset.ai) |
+| **Experience Level** | Basic Unity development knowledge |
 
-### Step 1: Clone the Repository
+## 🚀 Quick Start Installation
 
-Clone the MultiSet Quest SDK repository directly:
+### Method 1: Git URL (Recommended)
 
-```bash
-git clone https://github.com/MultiSet-AI/multiset-quest-sdk.git
+1. **Create or open your Unity project**
+   - New project: Select **3D (Built-In Render Pipeline)**
+   - Existing project: Ensure compatibility with Unity 6.0+
+
+2. **Add the SDK package**
+   ```
+   Window → Package Manager → + → Add package from git URL
+   ```
+   
+3. **Enter the repository URL**
+   ```
+   https://github.com/MultiSet-AI/multiset-quest-sdk.git
+   ```
+
+4. **Verify installation**
+   - Check that "MultiSet Quest SDK" appears under "In Project" in Package Manager
+
+![Package Manager Installation](Screenshots/package-manger.png)
+
+## 📦 Automatic Dependencies
+
+The SDK automatically installs these essential packages:
+
+- Unity Cloud - Draco (5.1.7)
+- Unity Cloud - glTFast (6.8.0)
+- Meta XR Core SDK (77.0.0)
+- Meta MR Utility Kit (77.0.0)
+- XR Plugin Management (4.5.1)
+- OpenXR Plugin (1.15.1)
+
+## 🎯 Import Sample Scenes
+
+Get started quickly with our comprehensive examples:
+
+1. **Open Package Manager** → Find "MultiSet Quest SDK"
+2. **Navigate to Samples tab** → Click "Import" next to "Sample Scenes"
+3. **Samples location**: `Assets/Samples/MultiSet Quest SDK/[version]/Single Frame Localization/Scenes/`
+
+The sample scenes demonstrate core SDK functionality and serve as implementation references.
+
+![API Configuration](Screenshots/scene-import.png)
+
+## ⚙️ Configuration Setup
+
+### Step 1: API Credentials Configuration
+
+Navigate to the configuration file:
+```
+Assets/Samples/MultiSet Quest SDK/[version]/Single Frame Localization/Resources/MultiSetConfig.asset
 ```
 
-### Step 2: Open in Unity
-
-1. Launch **Unity Hub**
-2. Click **"Open"** and select the cloned repository folder
-3. Unity will automatically import all required dependencies
-
-### Step 3: Project Structure
-
-After opening, you'll see the following folder structure:
-
-```
-Assets/
-├── MetaXR/                    # Meta XR SDK components
-├── MultiSet/                  # MultiSet SDK core files
-│   ├── Assets/               # SDK assets and resources
-│   ├── Plugins/              # Platform-specific plugins
-│   ├── Resources/            # Runtime resources
-│   ├── Scripts/              # Core SDK scripts
-│   └── Sprites/              # UI sprites and icons
-├── Oculus/                   # Oculus integration
-└── Plugins/                  # Additional plugins
-```
-
-### Step 4: Configure API Credentials
-
-1. Navigate to `Assets/MultiSet/Resources/MultiSetConfig.asset`
-2. Open the file and replace the placeholder values:
-
+**Update your credentials:**
 ```csharp
-Client Id = "YOUR_CLIENT_ID";
-Client Secret = "YOUR_CLIENT_SECRET";
+Client Id = "YOUR_CLIENT_ID_HERE"
+Client Secret = "YOUR_CLIENT_SECRET_HERE"
 ```
-<img src="Screenshots/8.png" alt="package manager" width="600">
 
-### Step 5: Configure Map Settings
+> 💡 **Get your credentials**: Visit [multiset.ai](https://multiset.ai) to obtain your Client ID and Secret
 
-1. Open the scene: `Assets/MultiSet/Scenes/SingleFrameLocalization.unity`
-2. Select the **MultisetSdkManager** GameObject in the hierarchy
-3. In the Inspector, locate the **SingleFrameLocalizationManager** component
-4. Choose your localization method:
-   - **Map**: For single, specific locations
-   - **MapSet**: For multiple related locations or larger areas
-5. Enter your **mapCode** or **mapSetCode** accordingly
+![API Configuration](Screenshots/open-config.png)
 
-<img src="Screenshots/9.png" alt="package manager" width="600">
+### Step 2: XR Plugin Management Setup
 
+1. **Project Settings**: `Edit → Project Settings → XR Plug-in Management`
+2. **Install if needed**: Click "Install XR Plugin Management"
+3. **Enable OpenXR**: Check the OpenXR checkbox under Plug-in Providers
 
-### Step 6: Build and Test
+![XR Plugin Setup](Screenshots/plugin-management.png)
 
-1. Connect your **Meta Quest** device via USB
-2. Go to **File > Build Settings**
-3. Ensure **Android** platform is selected
-4. Click **Build and Run**
-5. Test **Localization** functionality on your device
+### Step 3: Android Platform Configuration
 
----
+1. **Switch Platform**: `File → Build Settings → Android → Switch Platform`
+2. **Validate Setup**: `Edit → Project Settings → XR Plug-in Management → Project Validation`
+3. **Fix Issues**: Click "Fix All" to resolve any configuration problems
 
-## Option 2: Add SDK to Existing Project
+![Platform Configuration](Screenshots/configuration.png)
 
-Use this method to integrate the MultiSet SDK into an existing Unity project.
+### Step 4: Map Configuration
 
-### Step 1: Install Required Dependencies
+Configure your localization settings in the sample scene:
 
-Open **Window > Package Manager** and install the following packages by name:
+1. **Open sample scene**: `SingleFrameLocalization.unity`
+2. **Select MultisetSdkManager** GameObject in Hierarchy
+3. **Configure localization method** in SingleFrameLocalizationManager component:
 
-#### Core Meta XR Packages
-- `com.meta.xr.sdk.core`
-- `com.meta.xr.mrutilitykit`
+| Option | Use Case | Configuration |
+|--------|----------|---------------|
+| **Map** | Single, specific location | Enter **Map Code** |
+| **MapSet** | Multiple locations or larger areas | Enter **MapSet Code** |
 
-#### Unity Cloud Packages
-- `com.unity.cloud.gltfast`
-- `com.unity.cloud.draco`
+![Map Configuration](Screenshots/config-map.png)
 
-<img src="Screenshots/2.png" alt="package manager" width="600">
+> 📍 **Obtain codes**: Get your Map/MapSet codes from the [MultiSet Developer Dashboard](https://developer.multiset.ai)
 
-### Step 2: Configure XR Plugin Management
+### Step 5: Camera Permissions
 
-1. Go to **Edit > Project Settings**
-2. Navigate to **XR Plug-in Management**
-3. If not installed, click **"Install XR Plugin Management"**
-4. Under **Plug-in Providers**, enable **OpenXR**
-
-<img src="Screenshots/4.png" alt="package manager" width="600">
-
-### Step 3: Import MultiSet SDK Package
-
-1. Download the **MultiSet-Quest-SDK.unitypackage** from the [GitHub releases](https://github.com/MultiSet-AI/multiset-quest-sdk/releases)
-2. In Unity, go to **Assets > Import Package > Custom Package**
-3. Select the downloaded `.unitypackage` file
-4. Click **Import** to add all SDK components to your project
-
-<img src="Screenshots/6.png" alt="package manager" width="600">
-
-### Step 4: Platform Configuration
-
-1. Go to **File > Build Settings**
-2. Select **Android** and click **Switch Platform**
-3. Navigate to **Edit > Project Settings > XR Plug-in Management**
-4. Click **"Project Validation"**
-5. Click **"Fix All"** to resolve any configuration issues
-
-<img src="Screenshots/7.png" alt="package manager" width="600">
-
-### Step 5: Configure API Credentials
-
-1. Navigate to `Assets/MultiSet/Resources/MultiSetConfig.asset`
-2. Update your credentials:
-
-```csharp
-Client Id = "YOUR_CLIENT_ID";
-Client Secret = "YOUR_CLIENT_SECRET";
-```
-<img src="Screenshots/8.png" alt="package manager" width="600">
-
-### Step 6: Scene Setup
-
-1. Create a new scene or use an existing one
-2. Select the **MultisetSdkManager** GameObject
-3. In the **SingleFrameLocalizationManager** component:
-   - Choose between **"map"** or **"mapSet"**
-   - Enter your **mapCode** or **mapSetCode**
-
-<img src="Screenshots/9.png" alt="package manager" width="600">
-
-### Step 7: Camera Permissions
-
-The SDK automatically configures HEADSET CAMERA permissions, but verify in `Assets/Plugins/Android/AndroidManifest.xml`:
+The SDK automatically configures required permissions. Verify in `Assets/Plugins/Android/AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="horizonos.permission.HEADSET_CAMERA" />
 ```
 
-### Step 8: Build and Test
+### Step 6: Quest Build Requirements
 
-1. Connect your Meta Quest device
-2. Go to **File > Build Settings**
-3. Click **Build and Run**
-4. Test localization on your device
+Ensure your project meets these requirements:
+
+- ✅ Android Build Support installed
+- ✅ Minimum API Level: 32 or higher
+- ✅ XR Plugin Provider enabled
+- ✅ Scripting Backend: IL2CPP
+- ✅ Target Architecture: ARM64
+
+## 🏗️ Build and Deploy
+
+### Build Configuration
+
+1. **Build Settings**: `File → Build Settings`
+2. **Select Platform**: Android
+3. **Add Scenes**: Click "Add Open Scenes"
+
+**Essential Android Settings:**
+- Scripting Backend: **IL2CPP**
+- Target Architectures: **ARM64**
+- Minimum API Level: **32+**
+
+### Testing Deployment
+
+1. **Build and Run**: Connect your Quest device and click "Build and Run"
+2. **Grant Permissions**: Allow camera access when prompted
+3. **Test Localization**: Verify functionality in your target environment
+4. **Validate AR Features**: Ensure all AR capabilities work as expected
+
+## 🛠️ API Reference
+
+### Core SDK Components
+
+| Component | Purpose |
+|-----------|---------|
+| `MultiSetSdkManager` | Main SDK entry point and manager |
+| `SingleFrameLocalizationManager` | Handles VPS localization operations |
+| `MapMeshHandler` | Manages 3D mesh visualization |
+
+
+## ✅ Setup Verification Checklist
+
+Ensure your setup is complete:
+
+- [ ] Unity version 6000.0.55f1+ installed
+- [ ] Android platform selected and configured
+- [ ] OpenXR enabled in XR Plugin Management
+- [ ] API credentials configured in MultiSetConfig
+- [ ] Map/MapSet code entered in MultisetSdkManager
+- [ ] HEADSET_CAMERA permissions in Android manifest
+- [ ] Sample scene loads and runs without errors
+- [ ] Project Validation shows no critical issues
+
+## 🎓 Next Steps
+
+**After completing setup:**
+
+1. **Test Sample Scene**: Run `SingleFrameLocalization.unity` to verify everything works
+2. **Explore Documentation**: Visit [docs.multiset.ai](https://docs.multiset.ai) for advanced features
+3. **Start Integration**: Implement SDK components in your own Unity scenes
+4. **Join Community**: Connect with other developers using the SDK
+
+## 🔧 Troubleshooting
+
+### Common Issues and Solutions
+
+| Issue | Solution |
+|-------|----------|
+| **Package Manager Errors** | Update Unity Hub and Unity Editor to latest versions |
+| **XR Plugin Problems** | Restart Unity after enabling OpenXR |
+| **Build Failures** | Run Project Validation and fix all issues before building |
+| **Credential Errors** | Verify Client ID and Secret from MultiSet dashboard |
+| **Localization Issues** | Ensure stable internet connection and correct map codes |
+| **Camera Permission Denied** | Manually grant camera permissions in Quest settings |
+
+### Debug Steps
+
+1. **Check Console**: Look for error messages in Unity Console
+2. **Validate Credentials**: Ensure API credentials are correctly entered
+3. **Network Connectivity**: Test internet connection on Quest device
+4. **SDK Version**: Verify you're using the latest SDK version
+
+## 📞 Support & Resources
+
+### Get Help
+
+- 📧 **Technical Support**: [support@multiset.ai](mailto:support@multiset.ai)
+- 📚 **Documentation**: [docs.multiset.ai](https://docs.multiset.ai)
+- 🌐 **Website**: [multiset.ai](https://multiset.ai)
+- 👩‍💻 **Developer Portal**: [developer.multiset.ai](https://developer.multiset.ai)
+
+### Community
+
+Join our developer community for tips, best practices, and peer support.
+
+## 🔄 Updates
+
+### Automatic Updates
+
+1. **Package Manager** → Find "MultiSet Quest SDK"
+2. **Click "Update"** when available
+
+### Manual Updates
+
+Remove and re-add with latest Git URL:
+```
+https://github.com/MultiSet-AI/multiset-quest-sdk.git#latest
+```
+
+## 📄 License
+
+This software is proprietary. See the LICENSE file for complete terms and conditions.
 
 ---
 
-## Verification Checklist
+**SDK Version**: 1.8.0  
+**Unity Compatibility**: 6000.0.55f1+  
+**Platform**: Meta Quest 3/3S  
+**Last Updated**: July 2025
 
-verify sdk setup:
-
-- [ ] Unity version is 2022.3.50 or later
-- [ ] Android platform is selected
-- [ ] OpenXR is enabled in XR Plugin Management
-- [ ] API credentials are configured in `MultiSetConfig.cs`
-- [ ] Map code/set code is entered in MultisetSdkManager
-- [ ] HEADSET CAMERA permissions are present in Android manifest
-- [ ] Sample scene loads without errors
-
-## Next Steps
-
-Once setup is complete:
-
-1. **Test the sample scene**: Run `SingleFrameLocalization.unity` to verify functionality
-2. **Review the documentation**: Check [docs.multiset.ai](https://docs.multiset.ai) for advanced features
-3. **Integrate into your app**: Use the SDK components in your own scenes
-
-## Troubleshooting
-
-### Common Installation Issues
-
-**Package Manager errors**: Ensure Unity Hub and Unity Editor are up to date
-
-**XR Plugin issues**: Restart Unity after enabling OpenXR
-
-**Build failures**: Run Project Validation and fix all issues before building
-
-**Credential errors**: Verify your Client ID and Secret are correct from your MultiSet dashboard
-
-For additional support, contact [support@multiset.ai](mailto:support@multiset.ai)
+---

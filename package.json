@@ -1,0 +1,37 @@
+{
+  "name": "com.multiset.sdk.quest",
+  "version": "1.0.1",
+  "displayName": "MultiSet Quest SDK",
+  "description": "The MultiSet Quest SDK is a Unity-based development kit designed specifically for Meta Quest headsets. It provides developers with seamless integration to MultiSet's Visual Positioning System (VPS), enabling precise real-time localization, pose visualization, and camera access within virtual and mixed reality applications.",
+  "unity": "6000.0",
+  "unityRelease": "55f1",
+  "documentationUrl": "https://docs.multiset.ai",
+  "changelogUrl": "https://github.com/MultiSet-AI/multiset-quest-sdk/releases",
+  "licensesUrl": "https://github.com/MultiSet-AI/multiset-quest-sdk/blob/main/LICENSE",
+  
+  "author": {
+    "name": "MultiSet",
+    "email": "nikhil@multiset.ai",
+    "url": "https://www.multiset.ai/"
+  },
+  "repository": {
+    "url": "https://github.com/shyam-barange/meta-quest-upm.git",
+    "type": "git"
+  },
+  "dependencies": {
+    "com.unity.inputsystem": "1.7.0",
+    "com.meta.xr.sdk.core": "71.0.0",
+    "com.meta.xr.mrutilitykit": "77.0.0",
+    "com.unity.cloud.draco": "5.1.8",
+    "com.unity.cloud.gltfast": "6.13.1",
+    "com.unity.xr.management": "4.5.1",
+    "com.unity.xr.openxr": "1.15.1"
+  },
+  "samples": [
+    {
+      "displayName": "Single Frame Localization",
+      "description": "Complete sample scene demonstrating MultiSet Quest VPS localization",
+      "path": "Samples~/SingleFrameLocalization"
+    }
+  ]
+}
