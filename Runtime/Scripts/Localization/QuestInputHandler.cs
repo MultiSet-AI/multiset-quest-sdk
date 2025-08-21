@@ -15,13 +15,15 @@ namespace MultiSet
     {
         [Header("Input Configuration")]
         [SerializeField] private OVRInput.RawButton m_actionButton = OVRInput.RawButton.A;
-        [SerializeField] private SingleFrameLocalizationManager m_localizationManager;
+        private SingleFrameLocalizationManager m_localizationManager;
 
         private void Awake()
         {
+            m_localizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
+
             if (m_localizationManager == null)
             {
-                Debug.LogError("LocalizationManager is not assigned!");
+                Debug.LogError("LocalizationManager is not found!");
             }
         }
 

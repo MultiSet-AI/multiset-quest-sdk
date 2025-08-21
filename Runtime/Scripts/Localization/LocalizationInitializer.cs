@@ -13,35 +13,27 @@ namespace MultiSet
     public class LocalizationInitializer : MonoBehaviour
     {
         [Header("Core Components")]
-        [SerializeField] private SingleFrameLocalizationManager localizationManager;
-        [SerializeField] private FrameCaptureManager frameCaptureManager;
-
-        [Header("Optional Components")]
-        [SerializeField] private QuestInputHandler questInputHandler;
+        private SingleFrameLocalizationManager localizationManager;
+        private FrameCaptureManager frameCaptureManager;
+        private QuestInputHandler questInputHandler;
 
         private void Awake()
         {
-            // Validate references
+            localizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
+            frameCaptureManager = FindFirstObjectByType<FrameCaptureManager>();
+            questInputHandler = FindFirstObjectByType<QuestInputHandler>();
+
             if (localizationManager == null)
-            {
-                Debug.LogError("LocalizationManager is not assigned!");
-                return;
-            }
+                Debug.LogError("LocalizationManager is not found!");
 
             if (frameCaptureManager == null)
-            {
-                Debug.LogError("FrameCaptureManager is not assigned!");
-                return;
-            }
+                Debug.LogError("FrameCaptureManager is not found!");
+
+            if (questInputHandler == null)
+                Debug.LogError("QuestInputHandler is not found!");
 
             // Initialize the localization manager with the frame capture provider
             localizationManager.Initialize(frameCaptureManager);
-
-            // Optional: Setup input handler if present
-            if (questInputHandler != null)
-            {
-                Debug.Log("Quest input handler found and configured");
-            }
 
             Debug.Log("Localization system initialized successfully");
         }

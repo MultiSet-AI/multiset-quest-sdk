@@ -18,46 +18,48 @@ namespace MultiSet
         [Header("Camera References")]
         [SerializeField] private WebCamTextureManager m_webCamTextureManager;
         [SerializeField] private RawImage m_webCamImage; // Optional: display camera feed
-        
+
         // Events from interface
         public event Action<CapturedFrameData> OnFrameCaptured;
         public event Action<string> OnCaptureError;
-        
+
         private void Awake()
         {
+            m_webCamTextureManager = FindFirstObjectByType<WebCamTextureManager>();
+
             if (m_webCamTextureManager == null)
             {
-                Debug.LogError("WebCamTextureManager is not assigned!");
+                Debug.LogError("WebCamTextureManager is not found!");
             }
         }
-        
+
         /// Captures current webcam frame with associated camera pose and intrinsics
         public CapturedFrameData CaptureFrame()
         {
             if (m_webCamTextureManager == null)
             {
-                OnCaptureError?.Invoke("WebCamTextureManager is not assigned!");
+                OnCaptureError?.Invoke("WebCamTextureManager is not found in scene!");
                 return null;
             }
-            
+
             WebCamTexture webCamTexture = m_webCamTextureManager.WebCamTexture;
             if (webCamTexture == null || !webCamTexture.isPlaying)
             {
                 OnCaptureError?.Invoke("WebCamTexture is not available or not playing!");
                 return null;
             }
-            
+
             try
             {
                 // --- STEP 1: Capture Image Data ---
                 Texture2D texture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGB24, false);
                 texture.SetPixels(webCamTexture.GetPixels());
                 texture.Apply();
-                
+
                 // --- STEP 2: Get Associated Camera Pose ---
                 var cameraEye = m_webCamTextureManager.Eye;
                 Pose cameraPose = PassthroughCameraUtils.GetCameraPoseInWorld(cameraEye);
-                
+
                 // --- STEP 3: Get Camera Intrinsics ---
                 var cameraDetails = PassthroughCameraUtils.GetCameraIntrinsics(cameraEye);
                 var intrinsics = new CameraIntrinsics
@@ -69,16 +71,16 @@ namespace MultiSet
                     width = cameraDetails.Resolution.x,
                     height = cameraDetails.Resolution.y
                 };
-                
+
                 // --- STEP 4: Encode Image ---
                 byte[] imageBytes = texture.EncodeToPNG();
-                
+
                 // Optional: Display captured image in UI
                 if (m_webCamImage != null)
                 {
                     m_webCamImage.texture = texture;
                 }
-                
+
                 // Create captured data object using the interface type
                 var capturedData = new CapturedFrameData
                 {
@@ -88,10 +90,10 @@ namespace MultiSet
                     CameraIntrinsics = intrinsics,
                     TextureReference = texture // Store as object
                 };
-                
+
                 // Trigger event
                 OnFrameCaptured?.Invoke(capturedData);
-                
+
                 return capturedData;
             }
             catch (Exception e)
@@ -100,15 +102,15 @@ namespace MultiSet
                 return null;
             }
         }
-        
+
         /// Check if webcam is ready for capture
         public bool IsReadyToCapture()
         {
-            return m_webCamTextureManager != null && 
-                   m_webCamTextureManager.WebCamTexture != null && 
+            return m_webCamTextureManager != null &&
+                   m_webCamTextureManager.WebCamTexture != null &&
                    m_webCamTextureManager.WebCamTexture.isPlaying;
         }
-        
+
         /// Cleanup texture if needed
         public void CleanupTexture(CapturedFrameData data)
         {
