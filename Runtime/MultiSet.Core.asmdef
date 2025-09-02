@@ -5,12 +5,11 @@
         "Unity.XR.Management",
         "Unity.XR.OpenXR",
         "Unity.InputSystem",
-        "Meta.XR.MRUtilityKit",
-        "Meta.XR.SDK.Core",
-        "Unity.Cloud.Draco",
-        "Unity.Cloud.glTFast",
-        "Unity.XR.Oculus",
-        "Oculus.VR"
+        "Oculus.VR",
+        "Unity.TextMeshPro",
+        "Draco",
+        "glTFast",
+        "meta.xr.mrutilitykit"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
