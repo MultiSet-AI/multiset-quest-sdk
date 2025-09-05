@@ -166,10 +166,10 @@ namespace MultiSet
             }
             else
             {
-                var _meshLink = m_vpsMap.mapMesh.texturedMesh.meshLink;
-                if (!string.IsNullOrWhiteSpace(_meshLink))
+                var meshLink = m_vpsMap.mapMesh.texturedMesh.meshLink;
+                if (!string.IsNullOrWhiteSpace(meshLink))
                 {
-                    MultiSetApiManager.GetFileUrl(_meshLink, FileUrlCallbackEditor);
+                    MultiSetApiManager.GetFileUrl(meshLink, FileUrlCallbackEditor);
                 }
             }
         }
@@ -185,7 +185,7 @@ namespace MultiSet
 
             if (success)
             {
-                FileData meshUrl = JsonUtility.FromJson<FileData>(data);
+                var meshUrl = JsonUtility.FromJson<FileData>(data);
 
                 MultiSetHttpClient.DownloadFileAsync(meshUrl.url, (byte[] fileData) =>
                 {
@@ -239,7 +239,7 @@ namespace MultiSet
 
         private void ImportAndAttachGLB(string finalFilePath = null)
         {
-            string glbPath = finalFilePath;
+            var glbPath = finalFilePath;
 
             if (string.IsNullOrEmpty(glbPath))
             {
@@ -335,13 +335,13 @@ namespace MultiSet
         {
             this.mapSet = mapSet;
 
-            List<MapSetData> mapSetDataList = mapSet.mapSetData;
+            var mapSetDataList = mapSet.mapSetData;
 
-            foreach (MapSetData mapSetData in mapSetDataList)
+            foreach (var mapSetData in mapSetDataList)
             {
-                var _mapCode = mapSetData.map.mapCode;
+                var mapCode = mapSetData.map.mapCode;
                 var directoryPath = Path.Combine(Application.dataPath, "MultiSet/MapData/" + mapSet.mapSetCode);
-                var finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapSet.mapSetCode, _mapCode + ".glb");
+                var finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapSet.mapSetCode, mapCode + ".glb");
 
                 if (!Directory.Exists(directoryPath))
                 {
@@ -355,8 +355,8 @@ namespace MultiSet
                 }
                 else
                 {
-                    var _meshLink = mapSetData.map.mapMesh.texturedMesh.meshLink;
-                    MultiSetApiManager.GetFileUrl(_meshLink, FileUrlCallbackMapset);
+                    var meshLink = mapSetData.map.mapMesh.texturedMesh.meshLink;
+                    MultiSetApiManager.GetFileUrl(meshLink, FileUrlCallbackMapset);
                 }
             }
         }
@@ -381,16 +381,15 @@ namespace MultiSet
                         try
                         {
                             var mapId = Util.GetMapId(meshUrl.url);
-                            var _mapCode = GetMapCodeFromMapSetData(mapId);
+                            var mapCode = GetMapCodeFromMapSetData(mapId);
 
-                            var finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapSet.mapSetCode, _mapCode + ".glb");
+                            var finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapSet.mapSetCode, mapCode + ".glb");
 
                             var directoryPath = Path.Combine(Application.dataPath, "MultiSet/MapData/" + mapSet.mapSetCode);
-                            m_savePath = Path.Combine(directoryPath, _mapCode + ".glb");
+                            m_savePath = Path.Combine(directoryPath, mapCode + ".glb");
 
                             File.WriteAllBytes(m_savePath, fileData);
 
-                            // Refresh the Asset Database to make Unity recognize the new file
 #if UNITY_EDITOR
                             AssetDatabase.Refresh();
 #endif
@@ -432,7 +431,7 @@ namespace MultiSet
 
             if (mapSet != null && mapSet.mapSetData != null)
             {
-                foreach (MapSetData mapSetData in mapSet.mapSetData)
+                foreach (var mapSetData in mapSet.mapSetData)
                 {
                     if (mapSetData.map._id == mapId)
                     {
@@ -472,10 +471,10 @@ namespace MultiSet
             }
 
             // Check if a GameObject with the same name already exists in the scene
-            var mapSetObject = GameObject.Find(this.mapSet.mapSetCode);
+            var mapSetObject = GameObject.Find(mapSet.mapSetCode);
             if (mapSetObject == null)
             {
-                mapSetObject = new GameObject(this.mapSet.mapSetCode);
+                mapSetObject = new GameObject(mapSet.mapSetCode);
                 mapSetObject.transform.SetParent(m_mapSpace.transform, false);
                 mapSetObject.tag = "EditorOnly";
             }

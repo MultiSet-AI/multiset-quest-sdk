@@ -42,7 +42,7 @@ namespace MultiSet
                 return null;
             }
 
-            WebCamTexture webCamTexture = m_webCamTextureManager.WebCamTexture;
+            var webCamTexture = m_webCamTextureManager.WebCamTexture;
             if (webCamTexture == null || !webCamTexture.isPlaying)
             {
                 OnCaptureError?.Invoke("WebCamTexture is not available or not playing!");
@@ -52,13 +52,13 @@ namespace MultiSet
             try
             {
                 // --- STEP 1: Capture Image Data ---
-                Texture2D texture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGB24, false);
+                var texture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGB24, false);
                 texture.SetPixels(webCamTexture.GetPixels());
                 texture.Apply();
 
                 // --- STEP 2: Get Associated Camera Pose ---
                 var cameraEye = m_webCamTextureManager.Eye;
-                Pose cameraPose = PassthroughCameraUtils.GetCameraPoseInWorld(cameraEye);
+                var cameraPose = PassthroughCameraUtils.GetCameraPoseInWorld(cameraEye);
 
                 // --- STEP 3: Get Camera Intrinsics ---
                 var cameraDetails = PassthroughCameraUtils.GetCameraIntrinsics(cameraEye);
@@ -73,8 +73,7 @@ namespace MultiSet
                 };
 
                 // --- STEP 4: Encode Image ---
-                byte[] imageBytes = texture.EncodeToPNG();
-
+                var imageBytes = texture.EncodeToJPG(90);
                 // Optional: Display captured image in UI
                 if (m_webCamImage != null)
                 {

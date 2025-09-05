@@ -1630,9 +1630,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1524886771}
   - {fileID: 2021026515}
   - {fileID: 284553728}
-  - {fileID: 1524886771}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &457201102
@@ -3173,6 +3173,11 @@ MonoBehaviour:
   _posOffset: {x: 0, y: 0, z: 0}
   _rotOffset: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   _mirrorOffsetsForLeftHand: 1
+--- !u!1 &795006115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2627152374928064555, guid: 1857ce5e5e71e4f12b2c444fda4771c9, type: 3}
+  m_PrefabInstance: {fileID: 1524886770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &798593624
 GameObject:
   m_ObjectHideFlags: 0
@@ -3383,7 +3388,6 @@ MonoBehaviour:
   stopButton: {fileID: 2052231850}
   poiList: {fileID: 4569011423481898518}
   DestinationSelectUI: {fileID: 939250047}
-  material: {fileID: 0}
   m_openListButton: 2
   m_stopNavigationButton: 256
   m_poiListUI: {fileID: 939250047}
@@ -4851,9 +4855,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.05
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 17886c5e6e7874fac95ca886ed8c9b5e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 379433f3079524c948a11c72447fb8d8, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &1212057513
 MonoBehaviour:
@@ -5804,14 +5808,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5983562075707743966, guid: 1857ce5e5e71e4f12b2c444fda4771c9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1857ce5e5e71e4f12b2c444fda4771c9, type: 3}
 --- !u!4 &1524886771 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 260162862028363361, guid: 1857ce5e5e71e4f12b2c444fda4771c9, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5279102498747865225, guid: 1857ce5e5e71e4f12b2c444fda4771c9, type: 3}
   m_PrefabInstance: {fileID: 1524886770}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1575366997
@@ -11949,6 +11950,10 @@ PrefabInstance:
       value: MAP_5LCPVQZ0MR4D
       objectReference: {fileID: 0}
     - target: {fileID: 8300747780737540201, guid: 7d7db1522ea264a50b02f09f6143d035, type: 3}
+      propertyPath: bgLocalizationDuration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300747780737540201, guid: 7d7db1522ea264a50b02f09f6143d035, type: 3}
       propertyPath: LocalizationFailure.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -11991,7 +11996,7 @@ PrefabInstance:
     - target: {fileID: 8300747780737540201, guid: 7d7db1522ea264a50b02f09f6143d035, type: 3}
       propertyPath: LocalizationSuccess.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 795006115}
     - target: {fileID: 8300747780737540201, guid: 7d7db1522ea264a50b02f09f6143d035, type: 3}
       propertyPath: LocalizationSuccess.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
