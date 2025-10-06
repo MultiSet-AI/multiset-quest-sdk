@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: -650815242, guid: cda977b25375841f1a8e0a133b2effa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clientId: 180fbfea-e70f-44aa-bad6-fda7502b4adf
-  clientSecret: 653f4e37d89b8ea0064ea8f4ed7c3fec2a935c5d2daa6204e558d2a1ffcaaa99
+  clientId: 
+  clientSecret: 
   runtimeAuthentication: 0
