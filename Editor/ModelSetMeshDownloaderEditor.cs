@@ -10,19 +10,19 @@ using UnityEngine;
 
 namespace MultiSet
 {
-    [CustomEditor(typeof(MapMeshDownloader))]
-    public class MapMeshDownloaderEditor : Editor
+    [CustomEditor(typeof(ModelsetMeshDownloader))]
+    public class ModelSetMeshDownloaderEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
 
-            MapMeshDownloader mapMeshDownloader = (MapMeshDownloader)target;
+            ModelsetMeshDownloader mapMeshDownloader = (ModelsetMeshDownloader)target;
 
             GUILayout.Space(20);
-            EditorGUILayout.HelpBox("Download Mesh in Editor Mode. Helps to setup AR Scene", MessageType.Info);
+            EditorGUILayout.HelpBox("Download Object Mesh in Editor Mode. Helps to setup AR Scene", MessageType.Info);
 
-            GUIContent buttonContent = new GUIContent("Download Mesh", "This downloads the mesh file for the specified Map or MapSet.");
+            GUIContent buttonContent = new GUIContent("Download Mesh", "This downloads the mesh file for the specified ModelSet.");
             GUILayout.Space(20);
 
             if (mapMeshDownloader.isDownloading)
@@ -33,7 +33,7 @@ namespace MultiSet
             else
             {
                 GUI.backgroundColor = GUI.backgroundColor; // Reset to default color
-                buttonContent.text = "Download Mesh";
+                buttonContent.text = "Download Object Mesh";
             }
 
             if (GUILayout.Button(buttonContent, GUILayout.Height(30))) // Increase the height to 30

@@ -1,6 +1,6 @@
 # MultiSet Quest SDK - Installation Guide
 
-![MultiSet SDK](https://img.shields.io/badge/Unity-6000.0.55f1+-blue) ![Platform](https://img.shields.io/badge/Platform-Meta%20Quest-green) ![Version](https://img.shields.io/badge/Version-1.8.0-orange)
+![MultiSet SDK](https://img.shields.io/badge/Unity-6000.0.58f1+-blue) ![Platform](https://img.shields.io/badge/Platform-Meta%20Quest-green) ![Version](https://img.shields.io/badge/Version-1.8.0-orange)
 
 The MultiSet Quest SDK enables seamless integration of Visual Positioning System (VPS) capabilities into your Unity Meta Quest applications, providing accurate spatial localization and mesh visualization features.
 
@@ -10,7 +10,7 @@ Before you begin, make sure you have the following:
 
 | Requirement | Details |
 |-------------|---------|
-| **Unity Version** | Unity 6.0+ (Recommended: 6000.0.55f1) |
+| **Unity Version** | Unity 6.0+ (Recommended: 6000.0.58f1) |
 | **Platform Support** | Android Build Support module |
 | **Target Device** | Meta Quest 3 or Quest 3S |
 | **Network** | Stable internet connection for VPS functionality |
@@ -46,8 +46,8 @@ The SDK automatically installs these essential packages:
 
 - Unity Cloud - Draco (5.1.7)
 - Unity Cloud - glTFast (6.8.0)
-- Meta XR Core SDK (77.0.0)
-- Meta MR Utility Kit (77.0.0)
+- Meta XR Core SDK (78.0.0)
+- Meta MR Utility Kit (78.0.0)
 - XR Plugin Management (4.5.1)
 - OpenXR Plugin (1.15.1)
 
@@ -168,7 +168,7 @@ Ensure your project meets these requirements:
 
 Ensure your setup is complete:
 
-- [ ] Unity version 6000.0.55f1+ installed
+- [ ] Unity version 6000.0.58f1+ installed
 - [ ] Android platform selected and configured
 - [ ] OpenXR enabled in XR Plugin Management
 - [ ] API credentials configured in MultiSetConfig
@@ -239,8 +239,8 @@ This software is proprietary. See the LICENSE file for complete terms and condit
 
 ---
 
-**SDK Version**: 1.8.0  
-**Unity Compatibility**: 6000.0.55f1+  
+**SDK Version**: 1.9.2  
+**Unity Compatibility**: 6000.0.58f1+  
 **Platform**: Meta Quest 3/3S  
 **Last Updated**: July 2025
 

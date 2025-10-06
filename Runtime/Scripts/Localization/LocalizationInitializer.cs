@@ -13,27 +13,42 @@ namespace MultiSet
     public class LocalizationInitializer : MonoBehaviour
     {
         [Header("Core Components")]
-        private SingleFrameLocalizationManager localizationManager;
-        private FrameCaptureManager frameCaptureManager;
-        private QuestInputHandler questInputHandler;
+        private SingleFrameLocalizationManager m_singleFrameLocalizationManager;
+        private MapLocalizationManager m_mapLocalizationManager;
+        private ModelsetTrackingManager m_modelsetTrackingManager;
+
+        private FrameCaptureManager m_frameCaptureManager;
+        private QuestInputHandler m_questInputHandler;
 
         private void Awake()
         {
-            localizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
-            frameCaptureManager = FindFirstObjectByType<FrameCaptureManager>();
-            questInputHandler = FindFirstObjectByType<QuestInputHandler>();
+            m_singleFrameLocalizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
+            m_mapLocalizationManager = FindFirstObjectByType<MapLocalizationManager>();
+            m_modelsetTrackingManager = FindFirstObjectByType<ModelsetTrackingManager>();
 
-            if (localizationManager == null)
-                Debug.LogError("LocalizationManager is not found!");
+            m_frameCaptureManager = FindFirstObjectByType<FrameCaptureManager>();
+            m_questInputHandler = FindFirstObjectByType<QuestInputHandler>();
 
-            if (frameCaptureManager == null)
+            if (m_singleFrameLocalizationManager != null)
+            {
+                m_singleFrameLocalizationManager.Initialize(m_frameCaptureManager);
+            }
+
+            if (m_mapLocalizationManager != null)
+            {
+                m_mapLocalizationManager.Initialize(m_frameCaptureManager);
+            }
+
+            if (m_modelsetTrackingManager != null)
+            {
+                m_modelsetTrackingManager.Initialize(m_frameCaptureManager);
+            }
+
+            if (m_frameCaptureManager == null)
                 Debug.LogError("FrameCaptureManager is not found!");
 
-            if (questInputHandler == null)
+            if (m_questInputHandler == null)
                 Debug.LogError("QuestInputHandler is not found!");
-
-            // Initialize the localization manager with the frame capture provider
-            localizationManager.Initialize(frameCaptureManager);
 
             Debug.Log("Localization system initialized successfully");
         }

@@ -9,6 +9,8 @@ using System;
 using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -18,6 +20,8 @@ namespace MultiSet
 {
     public class MapMeshDownloader : MonoBehaviour
     {
+        // private MapLocalizationManager mapLocalizationManager;
+
         [Space(10)]
         [Tooltip("Drag and drop the MapSpace GameObject here.")]
         public GameObject m_mapSpace;
@@ -43,11 +47,17 @@ namespace MultiSet
             loadedMaps = 0;
             isDownloading = true;
 
-            var multisetSdkManager = FindFirstObjectByType<MultisetSdkManager>();
+            MultisetSdkManager multisetSdkManager = FindFirstObjectByType<MultisetSdkManager>();
 
-            var singleFrameLocalizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
+            MapLocalizationManager mapLocalizationManager = FindFirstObjectByType<MapLocalizationManager>();
+            SingleFrameLocalizationManager singleFrameLocalizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
 
-            if (singleFrameLocalizationManager != null)
+            if (mapLocalizationManager != null)
+            {
+                mapOrMapsetCode = mapLocalizationManager.mapOrMapsetCode;
+                itsMap = mapLocalizationManager.localizationType == LocalizationType.Map;
+            }
+            else if (singleFrameLocalizationManager != null)
             {
                 mapOrMapsetCode = singleFrameLocalizationManager.mapOrMapsetCode;
                 itsMap = singleFrameLocalizationManager.localizationType == LocalizationType.Map;
@@ -60,7 +70,7 @@ namespace MultiSet
                 return;
             }
 
-            var config = Resources.Load<MultiSetConfig>("MultiSetConfig");
+            MultiSetConfig config = Resources.Load<MultiSetConfig>("MultiSetConfig");
             if (config != null)
             {
                 multisetSdkManager.clientId = config.clientId;
@@ -147,10 +157,10 @@ namespace MultiSet
 
         public void DownloadGlbFileEditor(VpsMap vpsMap)
         {
-            m_vpsMap = vpsMap;
+            this.m_vpsMap = vpsMap;
 
-            var directoryPath = Path.Combine(Application.dataPath, "MultiSet/MapData/" + mapOrMapsetCode);
-            var finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapOrMapsetCode, mapOrMapsetCode + ".glb");
+            string directoryPath = Path.Combine(Application.dataPath, "MultiSet/MapData/" + mapOrMapsetCode);
+            string finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapOrMapsetCode, mapOrMapsetCode + ".glb");
 
             if (!Directory.Exists(directoryPath))
             {
@@ -166,10 +176,10 @@ namespace MultiSet
             }
             else
             {
-                var meshLink = m_vpsMap.mapMesh.texturedMesh.meshLink;
-                if (!string.IsNullOrWhiteSpace(meshLink))
+                string _meshLink = m_vpsMap.mapMesh.texturedMesh.meshLink;
+                if (!string.IsNullOrWhiteSpace(_meshLink))
                 {
-                    MultiSetApiManager.GetFileUrl(meshLink, FileUrlCallbackEditor);
+                    MultiSetApiManager.GetFileUrl(_meshLink, FileUrlCallbackEditor);
                 }
             }
         }
@@ -185,7 +195,7 @@ namespace MultiSet
 
             if (success)
             {
-                var meshUrl = JsonUtility.FromJson<FileData>(data);
+                FileData meshUrl = JsonUtility.FromJson<FileData>(data);
 
                 MultiSetHttpClient.DownloadFileAsync(meshUrl.url, (byte[] fileData) =>
                 {
@@ -194,9 +204,7 @@ namespace MultiSet
                         try
                         {
                             File.WriteAllBytes(m_savePath, fileData);
-
-                            // string mapId = Util.GetMapId(meshUrl.url);
-                            var finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapOrMapsetCode, mapOrMapsetCode + ".glb");
+                            string finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapOrMapsetCode, mapOrMapsetCode + ".glb");
 
                             // Refresh the Asset Database to make Unity recognize the new file
 #if UNITY_EDITOR
@@ -231,7 +239,7 @@ namespace MultiSet
             else
             {
                 isDownloading = false;
-                var errorJSON = JsonUtility.FromJson<ErrorJSON>(data);
+                ErrorJSON errorJSON = JsonUtility.FromJson<ErrorJSON>(data);
                 Debug.LogError("Error : " + errorJSON.error);
             }
 
@@ -239,7 +247,7 @@ namespace MultiSet
 
         private void ImportAndAttachGLB(string finalFilePath = null)
         {
-            var glbPath = finalFilePath;
+            string glbPath = finalFilePath;
 
             if (string.IsNullOrEmpty(glbPath))
             {
@@ -254,7 +262,8 @@ namespace MultiSet
             }
 
 #if UNITY_EDITOR
-            var importedObject = AssetDatabase.LoadAssetAtPath<GameObject>(glbPath);
+
+            GameObject importedObject = AssetDatabase.LoadAssetAtPath<GameObject>(glbPath);
 
             if (importedObject == null)
             {
@@ -262,30 +271,34 @@ namespace MultiSet
                 return;
             }
 
+            // Save as prefab
+            string prefabPath = Path.Combine("Assets/MultiSet/MapData/", mapOrMapsetCode + ".prefab");
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(importedObject, prefabPath);
+
             // Check if a GameObject with the same name already exists in the hierarchy
-            var existingObject = GameObject.Find(importedObject.name);
-            if (existingObject != null)
+            GameObject existingObject = GameObject.Find(importedObject.name);
+            if (existingObject == null)
             {
-                Debug.LogWarning("Map Mesh with the name " + importedObject.name + " already exists in the hierarchy.");
-                return;
-            }
+                // Instantiate the prefab in the scene
+                GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                if (instance != null)
+                {
+                    instance.transform.SetParent(m_mapSpace.transform, false);
+                    instance.tag = "EditorOnly";
 
-            var instance = PrefabUtility.InstantiatePrefab(importedObject) as GameObject;
-            if (instance != null)
-            {
-                instance.transform.SetParent(m_mapSpace.transform, false);
-
-                // Add EditorOnly Tag to the instantiated GameObject
-                instance.tag = "EditorOnly";
-
-                //save the gameObject as prefab 
-                var prefabPath = Path.Combine("Assets/MultiSet/MapData/", mapOrMapsetCode + ".prefab");
-                PrefabUtility.SaveAsPrefabAsset(instance, prefabPath);
-
+                    // Mark the scene as dirty so changes are saved
+                    #if UNITY_EDITOR
+                    UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(instance.scene);
+                    #endif
+                }
+                else
+                {
+                    Debug.LogError("Failed to instantiate the imported GLB object.");
+                }
             }
             else
             {
-                Debug.LogError("Failed to instantiate the imported GLB object.");
+                Debug.LogWarning("Map Mesh with the name " + importedObject.name + " already exists in the hierarchy.");
             }
 
             //Show Default Unity Dialog
@@ -314,11 +327,11 @@ namespace MultiSet
 
             if (success)
             {
-                var mapSetResult = JsonUtility.FromJson<MapSetResult>(data);
+                MapSetResult mapSetResult = JsonUtility.FromJson<MapSetResult>(data);
 
                 if (mapSetResult != null && mapSetResult.mapSet.mapSetData != null)
                 {
-                    mapSet = mapSetResult.mapSet;
+                    this.mapSet = mapSetResult.mapSet;
 
                     GetMapSetMesh(mapSet);
                 }
@@ -326,7 +339,7 @@ namespace MultiSet
             else
             {
                 isDownloading = false;
-                var errorJSON = JsonUtility.FromJson<ErrorJSON>(data);
+                ErrorJSON errorJSON = JsonUtility.FromJson<ErrorJSON>(data);
                 Debug.LogError($" Load MapSet Info Failed: " + errorJSON.error + "  code: " + statusCode);
             }
         }
@@ -335,13 +348,13 @@ namespace MultiSet
         {
             this.mapSet = mapSet;
 
-            var mapSetDataList = mapSet.mapSetData;
+            List<MapSetData> mapSetDataList = mapSet.mapSetData;
 
-            foreach (var mapSetData in mapSetDataList)
+            foreach (MapSetData mapSetData in mapSetDataList)
             {
-                var mapCode = mapSetData.map.mapCode;
-                var directoryPath = Path.Combine(Application.dataPath, "MultiSet/MapData/" + mapSet.mapSetCode);
-                var finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapSet.mapSetCode, mapCode + ".glb");
+                string _mapCode = mapSetData.map.mapCode;
+                string directoryPath = Path.Combine(Application.dataPath, "MultiSet/MapData/" + mapSet.mapSetCode);
+                string finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapSet.mapSetCode, _mapCode + ".glb");
 
                 if (!Directory.Exists(directoryPath))
                 {
@@ -355,8 +368,8 @@ namespace MultiSet
                 }
                 else
                 {
-                    var meshLink = mapSetData.map.mapMesh.texturedMesh.meshLink;
-                    MultiSetApiManager.GetFileUrl(meshLink, FileUrlCallbackMapset);
+                    string _meshLink = mapSetData.map.mapMesh.texturedMesh.meshLink;
+                    MultiSetApiManager.GetFileUrl(_meshLink, FileUrlCallbackMapset);
                 }
             }
         }
@@ -372,7 +385,7 @@ namespace MultiSet
 
             if (success)
             {
-                var meshUrl = JsonUtility.FromJson<FileData>(data);
+                FileData meshUrl = JsonUtility.FromJson<FileData>(data);
 
                 MultiSetHttpClient.DownloadFileAsync(meshUrl.url, (byte[] fileData) =>
                 {
@@ -380,16 +393,17 @@ namespace MultiSet
                     {
                         try
                         {
-                            var mapId = Util.GetMapId(meshUrl.url);
-                            var mapCode = GetMapCodeFromMapSetData(mapId);
+                            string mapId = Util.GetMapId(meshUrl.url);
+                            string _mapCode = GetMapCodeFromMapSetData(mapId);
 
-                            var finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapSet.mapSetCode, mapCode + ".glb");
+                            string finalFilePath = Path.Combine("Assets/MultiSet/MapData/" + mapSet.mapSetCode, _mapCode + ".glb");
 
-                            var directoryPath = Path.Combine(Application.dataPath, "MultiSet/MapData/" + mapSet.mapSetCode);
-                            m_savePath = Path.Combine(directoryPath, mapCode + ".glb");
+                            string directoryPath = Path.Combine(Application.dataPath, "MultiSet/MapData/" + mapSet.mapSetCode);
+                            m_savePath = Path.Combine(directoryPath, _mapCode + ".glb");
 
                             File.WriteAllBytes(m_savePath, fileData);
 
+                            // Refresh the Asset Database to make Unity recognize the new file
 #if UNITY_EDITOR
                             AssetDatabase.Refresh();
 #endif
@@ -420,7 +434,7 @@ namespace MultiSet
             }
             else
             {
-                var errorJSON = JsonUtility.FromJson<ErrorJSON>(data);
+                ErrorJSON errorJSON = JsonUtility.FromJson<ErrorJSON>(data);
                 Debug.LogError("Error : " + JsonUtility.ToJson(errorJSON));
             }
         }
@@ -431,7 +445,7 @@ namespace MultiSet
 
             if (mapSet != null && mapSet.mapSetData != null)
             {
-                foreach (var mapSetData in mapSet.mapSetData)
+                foreach (MapSetData mapSetData in mapSet.mapSetData)
                 {
                     if (mapSetData.map._id == mapId)
                     {
@@ -446,7 +460,7 @@ namespace MultiSet
 
         private void ImportAndAttachGLBMapset(string finalFilePath = null, string mapId = null)
         {
-            var glbPath = finalFilePath;
+            string glbPath = finalFilePath;
 
             if (string.IsNullOrEmpty(glbPath))
             {
@@ -461,8 +475,8 @@ namespace MultiSet
             }
 
 #if UNITY_EDITOR
-
-            var importedObject = AssetDatabase.LoadAssetAtPath<GameObject>(glbPath);
+            
+            GameObject importedObject = AssetDatabase.LoadAssetAtPath<GameObject>(glbPath);
 
             if (importedObject == null)
             {
@@ -471,23 +485,23 @@ namespace MultiSet
             }
 
             // Check if a GameObject with the same name already exists in the scene
-            var mapSetObject = GameObject.Find(mapSet.mapSetCode);
+            GameObject mapSetObject = GameObject.Find(this.mapSet.mapSetCode);
             if (mapSetObject == null)
             {
-                mapSetObject = new GameObject(mapSet.mapSetCode);
+                mapSetObject = new GameObject(this.mapSet.mapSetCode);
                 mapSetObject.transform.SetParent(m_mapSpace.transform, false);
                 mapSetObject.tag = "EditorOnly";
             }
 
             // Check if a GameObject with the same name already exists in the scene
-            var existingObject = GameObject.Find(importedObject.name);
+            GameObject existingObject = GameObject.Find(importedObject.name);
             if (existingObject != null)
             {
                 Debug.LogWarning("Map Mesh with the name " + importedObject.name + " already exists in the hierarchy.");
                 return;
             }
 
-            var instance = PrefabUtility.InstantiatePrefab(importedObject) as GameObject;
+            GameObject instance = PrefabUtility.InstantiatePrefab(importedObject) as GameObject;
 
             if (instance != null)
             {
@@ -508,10 +522,10 @@ namespace MultiSet
             if (loadedMaps == mapSet.mapSetData.Count)
             {
                 //save the gameObject as prefab 
-                var prefabPath = Path.Combine("Assets/MultiSet/MapData/", mapSet.mapSetCode + ".prefab");
+                string prefabPath = Path.Combine("Assets/MultiSet/MapData/", mapSet.mapSetCode + ".prefab");
                 PrefabUtility.SaveAsPrefabAsset(mapSetObject, prefabPath);
 
-                var prefabInstance = PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath)) as GameObject;
+                GameObject prefabInstance = PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath)) as GameObject;
                 prefabInstance.transform.SetParent(m_mapSpace.transform, false);
                 DestroyImmediate(mapSetObject);
 

@@ -15,16 +15,17 @@ namespace MultiSet
     {
         [Header("Input Configuration")]
         [SerializeField] private OVRInput.RawButton m_actionButton = OVRInput.RawButton.A;
-        private SingleFrameLocalizationManager m_localizationManager;
+
+        private SingleFrameLocalizationManager m_singleFrameLocalizationManager;
+        private MapLocalizationManager m_mapLocalizationManager;
+
+        private ModelsetTrackingManager m_modelsetTrackingManager;
 
         private void Awake()
         {
-            m_localizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
-
-            if (m_localizationManager == null)
-            {
-                Debug.LogError("LocalizationManager is not found!");
-            }
+            m_mapLocalizationManager = FindFirstObjectByType<MapLocalizationManager>();
+            m_singleFrameLocalizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
+            m_modelsetTrackingManager = FindFirstObjectByType<ModelsetTrackingManager>();
         }
 
         private void Update()
@@ -38,13 +39,19 @@ namespace MultiSet
 
         private void TriggerLocalization()
         {
-            if (m_localizationManager != null)
+            if (m_mapLocalizationManager != null)
             {
-                m_localizationManager.LocalizeFrame();
+                m_mapLocalizationManager.LocalizeFrame();
             }
-            else
+
+            if (m_singleFrameLocalizationManager != null)
             {
-                Debug.LogError("Cannot trigger localization - LocalizationManager is null!");
+                m_singleFrameLocalizationManager.LocalizeFrame();
+            }
+
+            if (m_modelsetTrackingManager != null)
+            {
+                m_modelsetTrackingManager.StartFrameTracking();
             }
         }
 
