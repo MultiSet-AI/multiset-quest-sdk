@@ -74,7 +74,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2173896559436142540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee1d0e0f952544caa1d2cf77fe5e6e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 76738389da10d46138e43c7558367595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiSet.WebCamTextureManager
   Eye: 0

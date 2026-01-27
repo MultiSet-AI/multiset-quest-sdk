@@ -494,6 +494,7 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
+  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -501,7 +502,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
-  m_Version: 2
 --- !u!1 &366475849
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,120 +851,8 @@ MonoBehaviour:
   alertMessage: 
   alertTimer: 0
   simulationDataResponse:
-    simulationData:
-    - _id: 696522fe544ad2b9a9448e3b
-      name: Live sdk
-      fileSize: 319765
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 14D32570
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/696522fe544ad2b9a9448e3b/696522fe544ad2b9a9448e3b.zip
-    - _id: 6964bda7968b57e108b00b06
-      name: android sim data
-      fileSize: 201213
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 09E8ABFF
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/6964bda7968b57e108b00b06/6964bda7968b57e108b00b06.zip
-    - _id: 696371b1544ad2b9a9433e79
-      name: Sdk sim data
-      fileSize: 334624
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 836C9F1D
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/696371b1544ad2b9a9433e79/696371b1544ad2b9a9433e79.zip
-    - _id: 6943ac7b54a1bd0c933ad8b2
-      name: Iphone
-      fileSize: 387040
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 316D5576
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/6943ac7b54a1bd0c933ad8b2/6943ac7b54a1bd0c933ad8b2.zip
-    - _id: 6936f59443fa6fe94d6b899f
-      name: Sdk release data
-      fileSize: 393810
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 38D0965E
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/6936f59443fa6fe94d6b899f/6936f59443fa6fe94d6b899f.zip
-    - _id: 692ead70efa4e3f9fdd704cf
-      name: Sim data
-      fileSize: 399799
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 5C97669D
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/692ead70efa4e3f9fdd704cf/692ead70efa4e3f9fdd704cf.zip
-    - _id: 692ea25defa4e3f9fdd6fbd5
-      name: Test sdk 1
-      fileSize: 379443
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 9CD1088C
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/692ea25defa4e3f9fdd6fbd5/692ea25defa4e3f9fdd6fbd5.zip
-    - _id: 692ea227efa4e3f9fdd6fbb1
-      name: Test sdk
-      fileSize: 415500
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 03479080
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/692ea227efa4e3f9fdd6fbb1/692ea227efa4e3f9fdd6fbb1.zip
-    - _id: 68ed261c0d19b78bfc131157
-      name: Gps map 2
-      fileSize: 673580
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 561B56B2
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/68ed261c0d19b78bfc131157/68ed261c0d19b78bfc131157.zip
-    - _id: 68ecebdb0d19b78bfc130c1a
-      name: Gps data
-      fileSize: 478522
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 2980955C
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/68ecebdb0d19b78bfc130c1a/68ecebdb0d19b78bfc130c1a.zip
-    - _id: 68d12a7b3b41360787e11bd0
-      name: android data
-      fileSize: 220857
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 11C46DB2
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/68d12a7b3b41360787e11bd0/68d12a7b3b41360787e11bd0.zip
-    - _id: 68ce77e43b41360787e0e163
-      name: Elep
-      fileSize: 447634
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 959D1E81
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/68ce77e43b41360787e0e163/68ce77e43b41360787e0e163.zip
-    - _id: 68cd37043b41360787e0bd34
-      name: Sim data
-      fileSize: 424118
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: AC9FBFF7
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/68cd37043b41360787e0bd34/68cd37043b41360787e0bd34.zip
-    - _id: 68cbd9923b41360787e07085
-      name: Unicorn
-      fileSize: 400360
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: DC4C54F4
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/68cbd9923b41360787e07085/68cbd9923b41360787e07085.zip
-    - _id: 68cbca563b41360787e0675f
-      name: V2 data
-      fileSize: 385480
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 682CE426
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/68cbca563b41360787e0675f/68cbca563b41360787e0675f.zip
-    - _id: 68cbad12a01b8e11a395d06f
-      name: Hall Simulation Data
-      fileSize: 339246
-      originalFilename: SimulationData.Zip
-      status: active
-      simulationCode: 0CAC968D
-      s3Key: 671b80be33d6dc761ca15253/simulation_data/68cbad12a01b8e11a395d06f/68cbad12a01b8e11a395d06f.zip
-  selectedSimulationIndex: 0
+    simulationData: []
+  selectedSimulationIndex: -1
   simulationDataDir: SimulationData
 --- !u!4 &562179999
 Transform:
@@ -1233,10 +1121,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4125561443100300578, guid: 1857ce5e5e71e4f12b2c444fda4771c9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1857ce5e5e71e4f12b2c444fda4771c9, type: 3}
 --- !u!4 &717496172 stripped
 Transform:
@@ -1624,14 +1509,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223261590}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize2D: {x: 10, y: 10}
+  m_CookieSize: 10
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -1708,23 +1593,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 4
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
   m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
-  m_RenderingLayersMask:
-    serializedVersion: 0
-    m_Bits: 1
-  m_ShadowRenderingLayersMask:
-    serializedVersion: 0
-    m_Bits: 1
-  m_Version: 4
-  m_LightLayerMask: 1
-  m_ShadowLayerMask: 1
-  m_RenderingLayers: 1
-  m_ShadowRenderingLayers: 1
 --- !u!1 &1309741599
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,6 +2128,7 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
+  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -2256,7 +2136,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
-  m_Version: 2
 --- !u!1 &1568067560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,6 +2420,7 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
+  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -2548,7 +2428,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
-  m_Version: 2
 --- !u!1 &1849515172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2998,7 +2877,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee1d0e0f952544caa1d2cf77fe5e6e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 76738389da10d46138e43c7558367595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiSet.WebCamTextureManager
 --- !u!224 &2704664597857791485
