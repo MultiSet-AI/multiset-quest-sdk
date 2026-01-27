@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 MultiSet AI. All rights reserved.
+Copyright (c) 2026 MultiSet AI. All rights reserved.
 Licensed under the MultiSet License. You may not use this file except in compliance with the License. and you can’t re-distribute this file without a prior notice
 For license details, visit www.multiset.ai.
 Redistribution in source or binary forms must retain this notice.
@@ -19,13 +19,13 @@ namespace MultiSet
         private SingleFrameLocalizationManager m_singleFrameLocalizationManager;
         private MapLocalizationManager m_mapLocalizationManager;
 
-        private ModelsetTrackingManager m_modelsetTrackingManager;
+        private ObjectTrackingManager m_objectTrackingManager;
 
         private void Awake()
         {
             m_mapLocalizationManager = FindFirstObjectByType<MapLocalizationManager>();
             m_singleFrameLocalizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
-            m_modelsetTrackingManager = FindFirstObjectByType<ModelsetTrackingManager>();
+            m_objectTrackingManager = FindFirstObjectByType<ObjectTrackingManager>();
         }
 
         private void Update()
@@ -49,9 +49,9 @@ namespace MultiSet
                 m_singleFrameLocalizationManager.LocalizeFrame();
             }
 
-            if (m_modelsetTrackingManager != null)
+            if (m_objectTrackingManager != null)
             {
-                m_modelsetTrackingManager.StartFrameTracking();
+                m_objectTrackingManager.StartObjectTracking();
             }
         }
 

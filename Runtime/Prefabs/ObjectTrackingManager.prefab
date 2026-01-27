@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4917134712746780885
+--- !u!1 &4071307741307913860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4252266265171422539}
-  - component: {fileID: 3180935952187438132}
-  - component: {fileID: 606599423961642885}
-  - component: {fileID: 6466296577855405677}
-  - component: {fileID: 1677987601284491558}
-  - component: {fileID: 9089346416582264727}
+  - component: {fileID: 4611312176995023536}
+  - component: {fileID: 8901097064319563148}
+  - component: {fileID: 8962684328111440366}
+  - component: {fileID: 4047330811289728305}
+  - component: {fileID: 3294059514756708740}
+  - component: {fileID: 7950530934625683012}
   m_Layer: 0
-  m_Name: ModelSetTrackingManager
+  m_Name: ObjectTrackingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4252266265171422539
+--- !u!4 &4611312176995023536
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4917134712746780885}
+  m_GameObject: {fileID: 4071307741307913860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -36,26 +36,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3180935952187438132
+--- !u!114 &8901097064319563148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4917134712746780885}
+  m_GameObject: {fileID: 4071307741307913860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1339823445, guid: cda977b25375841f1a8e0a133b2effa4, type: 3}
+  m_Script: {fileID: -1703063935, guid: cda977b25375841f1a8e0a133b2effa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectSpace: {fileID: 0}
-  modelsetCode: OBJ_AW08ZCRB4UDP
+  objectCodes:
+  - OBJ_AW08ZCRB4UDP
+  - OBJ_VT7SETGRHRQY
   autoTracking: 1
   restartTracking: 1
   confidenceCheck: 1
   _confidenceThreshold: 0.3
   showAlert: 1
-  captureDelay: 1
   firstTrackingUntilSuccess: 1
   ObjectTrackingInit:
     m_PersistentCalls:
@@ -114,6 +114,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ObjectTrackingFailure:
     m_PersistentCalls:
       m_Calls:
@@ -129,38 +141,50 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &606599423961642885
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8962684328111440366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4917134712746780885}
+  m_GameObject: {fileID: 4071307741307913860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b3eb92acc96441148b99036b0fd328a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionButton: 1
---- !u!114 &6466296577855405677
+--- !u!114 &4047330811289728305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4917134712746780885}
+  m_GameObject: {fileID: 4071307741307913860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08bd37078d6c74e8ba696aa5c82bdbc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1677987601284491558
+--- !u!114 &3294059514756708740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4917134712746780885}
+  m_GameObject: {fileID: 4071307741307913860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad91b01d7b8ff4dd996b774bd7b9f061, type: 3}
@@ -168,17 +192,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_webCamTextureManager: {fileID: 0}
   m_webCamImage: {fileID: 0}
---- !u!114 &9089346416582264727
+--- !u!114 &7950530934625683012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4917134712746780885}
+  m_GameObject: {fileID: 4071307741307913860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -713408364, guid: cda977b25375841f1a8e0a133b2effa4, type: 3}
+  m_Script: {fileID: -569511438, guid: cda977b25375841f1a8e0a133b2effa4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: MultiSetQuestSDK.dll::MultiSet.ObjectMeshHandler
   meshVisualizationOption: 0
   m_mesh: {fileID: 0}

@@ -14,12 +14,16 @@
     <meta-data android:name="com.oculus.telemetry.project_guid" android:value="d3b734c5-027a-4bf1-bcbc-9ef6111cb1bd" />
     <meta-data android:name="com.oculus.supportedDevices" android:value="quest2|questpro|quest3|quest3s" tools:replace="android:value" />
   </application>
-  <uses-feature android:name="android.hardware.vr.headtracking" android:version="1" android:required="true" />
+  
+   <uses-feature android:name="android.hardware.vr.headtracking" android:version="1" android:required="true" />
+  <horizonos:uses-horizonos-sdk horizonos:minSdkVersion="68" horizonos:targetSdkVersion="83" />
+
+  <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
   <uses-permission android:name="com.oculus.permission.USE_ANCHOR_API" />
-  <uses-feature android:name="com.oculus.feature.PASSTHROUGH" android:required="false" />
+  <uses-feature android:name="com.oculus.feature.PASSTHROUGH"android:required="true" />
   <uses-permission android:name="com.oculus.permission.USE_SCENE" />
   <uses-permission android:name="horizonos.permission.HEADSET_CAMERA" />
-  <uses-feature
-    android:name="com.oculus.feature.BOUNDARYLESS_APP"
-    android:required="true"/>
+
+  <uses-feature android:name="com.oculus.feature.BOUNDARYLESS_APP" android:required="true"/>
+
 </manifest>

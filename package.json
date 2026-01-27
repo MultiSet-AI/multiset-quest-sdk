@@ -1,10 +1,10 @@
 {
     "name": "com.multiset.sdk.quest",
-    "version": "1.9.2",
+    "version": "1.10.1",
     "displayName": "MultiSet Quest SDK",
     "description": "The MultiSet Quest SDK is a Unity-based development kit designed specifically for Meta Quest headsets. It provides developers with seamless integration to MultiSet's Visual Positioning System (VPS), enabling precise real-time localization, pose visualization, and camera access within virtual and mixed reality applications.",
-    "unity": "6000.0",
-    "unityRelease": "58f1",
+    "unity": "6000.3",
+    "unityRelease": "3f1",
     "documentationUrl": "https://docs.multiset.ai",
     "changelogUrl": "https://github.com/MultiSet-AI/multiset-quest-sdk/releases",
     "licensesUrl": "https://github.com/MultiSet-AI/multiset-quest-sdk/blob/main/LICENSE",
@@ -18,20 +18,20 @@
         "type": "git"
     },
     "dependencies": {
-        "com.meta.xr.sdk.core": "78.0.0",
-        "com.meta.xr.mrutilitykit": "78.0.0",
-        "com.meta.xr.sdk.interaction.ovr": "78.0.0",
-        "com.unity.cloud.draco": "5.1.8",
-        "com.unity.cloud.gltfast": "6.13.1",
-        "com.unity.xr.management": "4.5.1",
-        "com.unity.xr.openxr": "1.15.1",
+        "com.meta.xr.sdk.core": "81.0.0",
+        "com.meta.xr.mrutilitykit": "83.0.1",
+        "com.meta.xr.sdk.interaction.ovr": "81.0.0",
+        "com.unity.cloud.draco": "5.4.2",
+        "com.unity.cloud.gltfast": "6.15.1",
+        "com.unity.xr.management": "4.5.4",
+        "com.unity.xr.openxr": "1.16.1",
         "com.unity.ai.navigation": "2.0.9",
-        "com.unity.inputsystem": "1.7.0"
+        "com.unity.inputsystem": "1.17.0"
     },
     "samples": [
         {
             "displayName": "Sample Scenes",
-            "description": "Import Localization, SingleFrameLocalization, ModelSetTracking and Navigation Scenes from MultiSet Quest SDK",
+            "description": "Import Localization, SingleFrameLocalization, ObjectTracking and Navigation Scenes from MultiSet Quest SDK",
             "path": "Samples~/Scenes"
         }
     ]

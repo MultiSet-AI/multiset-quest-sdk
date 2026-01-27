@@ -8,8 +8,7 @@
         "Oculus.VR",
         "Unity.TextMeshPro",
         "Draco",
-        "glTFast",
-        "meta.xr.mrutilitykit"
+        "glTFast"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

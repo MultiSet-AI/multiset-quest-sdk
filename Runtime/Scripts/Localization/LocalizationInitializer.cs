@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 MultiSet AI. All rights reserved.
+Copyright (c) 2026 MultiSet AI. All rights reserved.
 Licensed under the MultiSet License. You may not use this file except in compliance with the License. and you can’t re-distribute this file without a prior notice
 For license details, visit www.multiset.ai.
 Redistribution in source or binary forms must retain this notice.
@@ -15,7 +15,7 @@ namespace MultiSet
         [Header("Core Components")]
         private SingleFrameLocalizationManager m_singleFrameLocalizationManager;
         private MapLocalizationManager m_mapLocalizationManager;
-        private ModelsetTrackingManager m_modelsetTrackingManager;
+        private ObjectTrackingManager m_objectTrackingManager;
 
         private FrameCaptureManager m_frameCaptureManager;
         private QuestInputHandler m_questInputHandler;
@@ -24,7 +24,7 @@ namespace MultiSet
         {
             m_singleFrameLocalizationManager = FindFirstObjectByType<SingleFrameLocalizationManager>();
             m_mapLocalizationManager = FindFirstObjectByType<MapLocalizationManager>();
-            m_modelsetTrackingManager = FindFirstObjectByType<ModelsetTrackingManager>();
+            m_objectTrackingManager = FindFirstObjectByType<ObjectTrackingManager>();
 
             m_frameCaptureManager = FindFirstObjectByType<FrameCaptureManager>();
             m_questInputHandler = FindFirstObjectByType<QuestInputHandler>();
@@ -39,9 +39,9 @@ namespace MultiSet
                 m_mapLocalizationManager.Initialize(m_frameCaptureManager);
             }
 
-            if (m_modelsetTrackingManager != null)
+            if (m_objectTrackingManager != null)
             {
-                m_modelsetTrackingManager.Initialize(m_frameCaptureManager);
+                m_objectTrackingManager.Initialize(m_frameCaptureManager);
             }
 
             if (m_frameCaptureManager == null)
