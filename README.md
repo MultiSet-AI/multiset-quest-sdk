@@ -277,7 +277,7 @@ This software is proprietary. See the LICENSE file for complete terms and condit
 
 ---
 
-**SDK Version**: 1.11.3
+**SDK Version**: 1.14.3
 **Unity Compatibility**: 6000.3.11f1
 **Platform**: Meta Quest 3/3S
 **Last Updated**: March 2026

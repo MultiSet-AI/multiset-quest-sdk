@@ -3377,6 +3377,7 @@ MonoBehaviour:
   pathHeightAboveGround: 0.1
   cornerVisualizationPrefab: {fileID: 2874670000088497872, guid: a76558bfbbdf846e88427df69facd471, type: 3}
   isCornersVisible: 0
+  invalidPathTimeout: 10
 --- !u!114 &798593630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14294,7 +14295,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee1d0e0f952544caa1d2cf77fe5e6e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 76738389da10d46138e43c7558367595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiSet.WebCamTextureManager
 --- !u!1 &6716827305609873198
@@ -15769,7 +15770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 166902089980687335, guid: 391746b4d05e046f1ad857954bef332a, type: 3}
       propertyPath: mapOrMapsetCode
-      value: 
+      value: MAP_5LCPVQZ0MR4D
       objectReference: {fileID: 0}
     - target: {fileID: 166902089980687335, guid: 391746b4d05e046f1ad857954bef332a, type: 3}
       propertyPath: frameCaptureInterval
